@@ -2,6 +2,15 @@ import { $Diff } from "utility-types";
 import campaignsRaw from "./campaigns.json";
 import nounsRaw from "./nouns.json";
 
+const indexBy = <T extends object>(
+  list: Array<T>,
+  key: string
+): Record<string, T> =>
+  list.reduce((dict, x) => {
+    if (!(key in x)) throw new Error("Index failed");
+    return { ...dict, [(x as any)[key]]: x };
+  }, {});
+
 /**
  * CAMPAIGNS
  */
@@ -25,6 +34,7 @@ export type DraftCampaign = $Diff<
 >;
 
 export const campaigns = campaignsRaw as Array<Campaign>;
+export const campaignsById = indexBy(campaigns, "id");
 
 /**
  * NOUNS
@@ -61,3 +71,4 @@ export type DraftNoun = $Diff<
 >;
 
 export const nouns = nounsRaw as Array<Noun>;
+export const nounsById = indexBy(nouns, "id");

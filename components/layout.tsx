@@ -1,3 +1,4 @@
+import { FunctionComponent } from "react";
 import { BookOpenIcon, UserGroupIcon, XIcon } from "@heroicons/react/outline";
 import { classNames } from "util/class-names";
 import Link from "next/link";
@@ -42,6 +43,39 @@ export const Sidebar = () => {
             ))}
           </nav>
         </div>
+      </div>
+    </div>
+  );
+};
+
+interface Breadcrumb {
+  text: string;
+  href: string;
+}
+interface PageProps {
+  heading: string;
+  breadcrumbs?: Array<Breadcrumb>;
+}
+export const Page: FunctionComponent<PageProps> = ({
+  heading,
+  breadcrumbs,
+  children,
+}) => {
+  return (
+    <div>
+      <Sidebar />
+      <div className="lg:pl-64 flex flex-col flex-1">
+        <div className="px-6 py-3 bg-purple-800 text-white flex flex-col">
+          {breadcrumbs && breadcrumbs.length
+            ? breadcrumbs.map((b) => (
+                <Link href={b.href}>
+                  <a>{b.text}</a>
+                </Link>
+              ))
+            : null}
+          <h1 className="text-4xl">{heading}</h1>
+        </div>
+        <main className="px-6 py-4 flex flex-col space-y-2">{children}</main>
       </div>
     </div>
   );
