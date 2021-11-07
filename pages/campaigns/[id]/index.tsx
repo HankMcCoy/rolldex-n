@@ -1,7 +1,9 @@
 import type { NextPage } from "next";
 import { Page } from "components/layout";
+import { LinkBox } from "components/link-box";
+import { TitledSection } from "components/titled-section";
 import { useRouter } from "next/router";
-import { campaignsById, sessions } from "fake-data";
+import { campaignsById, sessions, members } from "fake-data";
 
 const ViewCampaign: NextPage = ({}) => {
   const router = useRouter();
@@ -15,11 +17,34 @@ const ViewCampaign: NextPage = ({}) => {
       heading={campaign.name}
       breadcrumbs={[{ text: "Campaigns", href: "/campaigns" }]}
     >
-      <h2>
-      {campaign.description}
-      </h2>
-      <h2>Members</h2>
-      <h2>Sessions</h2>
+      <div className="flex space-x-6">
+        <div className="flex-1 flex flex-col space-y-6">
+          <TitledSection title="Description">
+            {campaign.description}
+          </TitledSection>
+          <TitledSection title="Members">
+            {members.map((m) => (
+              <LinkBox title={m.email} href="#" />
+            ))}
+          </TitledSection>
+          <TitledSection title="Sessions">
+            <div className="flex flex-col space-y-1">
+              {sessions.map((s) => (
+                <LinkBox
+                  title={s.name}
+                  desc={s.summary}
+                  href={`/campaigns/${id}/sessions/${s.id}`}
+                />
+              ))}
+            </div>
+          </TitledSection>
+        </div>
+        <div className="flex-1">
+          <TitledSection title="People" />
+          <TitledSection title="Factions" />
+          <TitledSection title="Places" />
+        </div>
+      </div>
     </Page>
   );
 };

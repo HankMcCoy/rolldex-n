@@ -2,6 +2,7 @@ import { $Diff } from "utility-types";
 import campaignsRaw from "./campaigns.json";
 import nounsRaw from "./nouns.json";
 import sessionsRaw from "./sessions.json";
+import membersRaw from "./members.json";
 
 const indexBy = <T extends object>(
   list: Array<T>,
@@ -74,5 +75,45 @@ export type DraftNoun = $Diff<
 export const nouns = nounsRaw as Array<Noun>;
 export const nounsById = indexBy(nouns, "id");
 
-export type Session = {};
+/**
+ * SESSIONS
+ */
+
+export type Session = {
+  id: number;
+  name: string;
+  campaign_id: number;
+  summary: string;
+  notes: string;
+  private_notes: string;
+  inserted_at: string;
+  updated_at: string;
+};
+
+export type DraftSession = $Diff<
+  Session,
+  { id: number; inserted_at: string; updated_at: string }
+>;
 export const sessions = sessionsRaw as Array<Session>;
+export const sessionsById = indexBy(sessions, "id");
+
+/**
+ * MEMBERS
+ */
+export type MemberType = "READ_ONLY";
+export type Member = {
+  id: number;
+  inserted_at: string;
+  updated_at: string;
+
+  user_id: number;
+  campaign_id: number;
+  email: string;
+  member_type: MemberType;
+};
+
+export type DraftMember = $Diff<
+  Member,
+  { id: number; inserted_at: string; updated_at: string; user_id: number }
+>;
+export const members = membersRaw as Array<Member>;
