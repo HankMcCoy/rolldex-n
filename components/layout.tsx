@@ -15,22 +15,22 @@ export const Sidebar = () => {
   return (
     <div className="hidden lg:flex lg:w-64 lg:flex-col lg:fixed lg:inset-y-0">
       {/* Sidebar component, swap this element with another sidebar if you like */}
-      <div className="flex flex-col flex-grow pt-5 bg-gray-700 overflow-y-auto">
-        <div className="flex items-center flex-shrink-0 px-4">
-          <a href="/" className="h-10 leading-10 w-auto text-3xl text-white">
+      <div className="flex flex-col flex-grow bg-gray-700 overflow-y-auto">
+        <div className="h-24 flex items-center flex-shrink-0 px-4">
+          <a href="/" className="leading-10 w-auto text-3xl text-white">
             Rolldex
           </a>
         </div>
-        <div className="mt-5 flex-1 flex flex-col">
-          <nav className="flex-1 px-2 pb-4 space-y-1">
+        <div className="flex-1 flex flex-col">
+          <nav className="flex-1 pb-4 space-y-1">
             {navigation.map((item) => (
               <Link key={item.name} href={item.href}>
                 <a
                   className={classNames(
-                    item.href === router.pathname
+                    router.pathname.startsWith(item.href)
                       ? "bg-gray-800 text-white"
                       : "text-gray-100 hover:bg-gray-600",
-                    "group flex items-center px-3 py-3 font-medium rounded-md"
+                    "group flex items-center px-5 py-3 font-medium"
                   )}
                 >
                   <item.icon
@@ -65,7 +65,7 @@ export const Page: FunctionComponent<PageProps> = ({
     <div>
       <Sidebar />
       <div className="lg:pl-64 flex flex-col flex-1">
-        <div className="px-6 py-3 bg-purple-800 text-white flex flex-col">
+        <div className="px-6 h-24 bg-violet-700 text-white flex flex-col justify-center space-y-1">
           {breadcrumbs && breadcrumbs.length
             ? breadcrumbs.map((b) => (
                 <Link href={b.href}>

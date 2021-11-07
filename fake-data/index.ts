@@ -1,6 +1,7 @@
 import { $Diff } from "utility-types";
 import campaignsRaw from "./campaigns.json";
 import nounsRaw from "./nouns.json";
+import sessionsRaw from "./sessions.json";
 
 const indexBy = <T extends object>(
   list: Array<T>,
@@ -72,3 +73,6 @@ export type DraftNoun = $Diff<
 
 export const nouns = nounsRaw as Array<Noun>;
 export const nounsById = indexBy(nouns, "id");
+
+export type Session = {};
+export const sessions = sessionsRaw as Array<Session>;
