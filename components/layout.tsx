@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 import { BookOpenIcon, UserGroupIcon, XIcon } from "@heroicons/react/outline";
-import { classNames } from "util/class-names";
+import { classNames } from "r-util/class-names";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
@@ -8,6 +8,9 @@ const navigation = [
   { name: "Campaigns", href: "/campaigns", icon: UserGroupIcon },
   { name: "Systems", href: "/systems", icon: BookOpenIcon },
 ];
+
+const intersperse = <T extends unknown>(list: Array<T>, separator: T) =>
+  list.slice(1).reduce((a, i) => [...a, separator, i], [list[0]]);
 
 export const Sidebar = () => {
   const router = useRouter();
@@ -66,13 +69,18 @@ export const Page: FunctionComponent<PageProps> = ({
       <Sidebar />
       <div className="lg:pl-64 flex flex-col flex-1">
         <div className="px-6 h-24 bg-violet-700 text-white flex flex-col justify-center space-y-1">
-          {breadcrumbs && breadcrumbs.length
-            ? breadcrumbs.map((b) => (
-                <Link href={b.href}>
-                  <a>{b.text}</a>
-                </Link>
-              ))
-            : null}
+          <div className="flex flex-row space-x-1">
+            {breadcrumbs && breadcrumbs.length
+              ? intersperse(
+                  breadcrumbs.map((b) => (
+                    <Link href={b.href}>
+                      <a>{b.text}</a>
+                    </Link>
+                  )),
+                  <span>&gt;</span>
+                )
+              : null}
+          </div>
           <h1 className="text-4xl">{heading}</h1>
         </div>
         <main className="px-6 py-4 flex flex-col space-y-2">{children}</main>
