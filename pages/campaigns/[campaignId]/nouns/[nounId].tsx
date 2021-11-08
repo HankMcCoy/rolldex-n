@@ -3,6 +3,7 @@ import { campaignsById, nounsById, Noun } from "fake-data";
 import { GetServerSideProps } from "next";
 import { ParsedUrlQuery } from "querystring";
 import { Page } from "components/layout";
+import { TitledSection } from "components/titled-section";
 import { convertParams } from "r-util";
 import Markdown from "react-remarkable";
 
@@ -25,14 +26,17 @@ const NounDetailPage = ({ params }: Props) => {
         { text: "People", href: `/campaigns/${campaign.id}/nouns/people` },
       ]}
     >
-      <h2>Summary</h2>
-      <p>{noun.summary}</p>
-      <h2>Notes</h2>
-      <p className="prose">
-        <Markdown source={noun.notes} />
-      </p>
-      <h2>Private Notes</h2>
-      <p>{noun.private_notes}</p>
+      <TitledSection title="Summary">
+        <p>{noun.summary}</p>
+      </TitledSection>
+      <TitledSection title="Notes">
+        <p className="prose">
+          <Markdown source={noun.notes} />
+        </p>
+      </TitledSection>
+      <TitledSection title="Private Notes">
+        <p>{noun.private_notes}</p>
+      </TitledSection>
     </Page>
   );
 };

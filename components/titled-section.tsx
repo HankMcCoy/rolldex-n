@@ -1,4 +1,5 @@
 import { FunctionComponent } from "react";
+import { Heading } from "components/text";
 interface Props {
   title: string;
 }
@@ -7,7 +8,9 @@ export const TitledSection: FunctionComponent<Props> = ({
   children,
 }) => (
   <div>
-    <h2 className="text-2xl mb-2">{title}</h2>
+    <Heading l={2} className="mb-2">
+      {title}
+    </Heading>
     {children}
   </div>
 );

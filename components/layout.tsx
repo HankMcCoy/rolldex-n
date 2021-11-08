@@ -33,7 +33,7 @@ export const Sidebar = () => {
                     router.pathname.startsWith(item.href)
                       ? "bg-gray-800 text-white"
                       : "text-gray-100 hover:bg-gray-600",
-                    "group flex items-center px-5 py-3 font-medium"
+                    "group flex items-center px-5 py-3 font-base"
                   )}
                 >
                   <item.icon

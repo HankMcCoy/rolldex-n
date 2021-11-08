@@ -15,7 +15,16 @@ class MyDocument extends Document {
   render() {
     return (
       <Html className="h-full bg-gray-100">
-        <Head />
+        <Head>
+          <link
+            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700"
+            rel="stylesheet"
+          />
+          <link
+            href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400"
+            rel="stylesheet"
+          />
+        </Head>
         <body className="h-full font-light">
           <Main />
           <NextScript />
